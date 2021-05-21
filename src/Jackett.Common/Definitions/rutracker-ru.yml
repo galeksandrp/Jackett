@@ -463,34 +463,6 @@ search:
           args: f
     title:
       selector: a[href^="./viewtopic.php?t="]
-      filters:
-        # normalize to SXXEYY format
-        - name: re_replace
-          args: ["[\\.\\,\\:\\-\\/\\|\\[\\]\\(\\)]", " "]
-        - name: re_replace
-          args: ["(.*)[CСcс]езон\\s*(\\d+)\\s*[CСcс]ери[ияй]\\s*(\\d+)\\s*(\\d+)\\s*из\\s*\\d+(.*)", "$1 S$2E$3-$4 rus $5"]
-        - name: re_replace
-          args: ["(.*)[CСcс]езон\\s*(\\d+)\\s*(\\d+)\\s*(\\d+)\\s*[CСcс]ери[ияй]\\s*из\\s*\\d+(.*)", "$1 S$2E$3-$4 rus $5"]
-        - name: re_replace
-          args: ["(.*)(\\d+)\\s*[CСcс]езон\\s*(\\d+)\\s*(\\d+)\\s*[CСcс]ери[ияй]\\s*из\\s*\\d+(.*)", "$1 S$2E$3-$4 rus $5"]
-        - name: re_replace
-          args: ["(.*)[CСcс]езон\\s*(\\d+)\\s*[CСcс]ери[ияй]\\s*(\\d+)\\s*(\\d+)\\s*(.*)", "$1 S$2E$3-$4 rus $5"]
-        - name: re_replace
-          args: ["(.*)[CСcс]езон\\s*(\\d+)\\s*[CСcс]ери[ияй]\\s*(\\d+)\\s*из\\s*\\d+(.*)", "$1 S$2E$3 rus $4"]
-        - name: re_replace
-          args: ["(.*)[CСcс]езон\\s*(\\d+)(.*)", "$1 S$2 rus $3"]
-        - name: re_replace
-          args: ["(.*)[CСcс]]ери[ия]\\s*(\\d+)(.*)", "$1 E$2 rus $3"]
-        - name: re_replace
-          args: ["(\\([А-Яа-яЁё\\W]+\\))|(^[А-Яа-яЁё\\W\\d]+\\/ )|([а-яА-ЯЁё \\-]+,+)|([а-яА-ЯЁё]+)", "{{ if .Config.striprussian }}{{ else }}$1$2$3$4{{ end }}"]
-        - name: replace
-          args: ["WEBRip", "WEBDL"]
-        - name: replace
-          args: ["WEB DL", "WEBDL"]
-        - name: replace
-          args: ["WEBDLRip", "WEBDL"]
-        - name: replace
-          args: ["HDTVRip", "HDTV"]
     details:
       selector: a[href^="./viewtopic.php?t="]
       attribute: href

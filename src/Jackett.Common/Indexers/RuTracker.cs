@@ -1574,6 +1574,8 @@ namespace Jackett.Common.Indexers
                     release.Title = DetectRereleaseInReleaseTitle(release.Title);
                 }
 
+                release.Title = qDetailsLink.TextContent;
+
                 return release;
             }
             catch (Exception ex)
