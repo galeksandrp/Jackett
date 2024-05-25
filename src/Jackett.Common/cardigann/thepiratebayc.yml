@@ -1,11 +1,12 @@
 ---
-id: thepiratebay
-name: The Pirate Bay
+id: thepiratebayc
+name: The Pirate BayC
 description: "The Pirate Bay (TPB) is the galaxy’s most resilient Public BitTorrent site"
 language: en-US
 type: public
 encoding: UTF-8
 links:
+  - http://piratebayo3klnzokct3wt5yyxb2vpebbuyjl7m623iaxmqhsd52coid.onion/
   - https://thepiratebay.org/
   - https://thepiratebay.unblockninja.com/
   - https://thepiratebay.ninjaproxy1.com/
@@ -133,6 +134,9 @@ caps:
     book-search: [q]
 
 settings:
+  - name: utilsappend
+    type: text
+    label: Utils - append this to query
   - name: info_api
     type: info
     label: About this Indexer
@@ -141,7 +145,7 @@ settings:
 search:
   paths:
     # https://apibay.org/q.php?q=bad+batch&cat=100,101,102,103,104
-    - path: "https://apibay.org/{{ if .Keywords }}q.php?q={{ .Keywords }}&cat={{ join .Categories \",\" }}{{ else }}precompiled/data_top100_recent.json{{ end }}"
+    - path: "{{ if .Keywords }}q.php?q={{ .Keywords }}{{ else }}precompiled/data_top100_recent.json{{ end }}"
       response:
         type: json
 
@@ -160,6 +164,8 @@ search:
     - name: re_replace
       args: ["(?i)\\b(General\\.Hospital)\\.((S\\d{2,3})(E\\d{2,3}))\\b", "$1.$2|\"$3.$4\""]
     - name: tolower
+    - name: append
+      args: "{{ .Config.utilsappend }}"
 
   rows:
     selector: $
